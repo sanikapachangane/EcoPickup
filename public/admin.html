@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | EcoPickup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container navbar">
+        <a href="http://localhost:3001/" class="brand" aria-label="EcoPickup home">
+          <span class="brand-mark">♻</span>
+          <span>EcoPickup</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+        <nav class="nav-links" id="siteNav" aria-label="Main navigation">
+          <a href="http://localhost:3001/">Home</a>
+          <a href="http://localhost:3002/">Request Pickup</a>
+          <a href="http://localhost:3003/">Track Request</a>
+          <a href="http://localhost:3004/">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero admin-page-hero" id="adminPageIntro">
+        <div class="container">
+          <span class="section-kicker">EcoPickup operations</span>
+          <h1>Collection dashboard</h1>
+          <p>Review incoming requests and keep collection status up to date.</p>
+        </div>
+      </section>
+
+      <section class="form-shell admin-login-section">
+        <div class="container admin-login-wrap">
+          <div id="adminLoginCard" class="form-card admin-login-card">
+            <span class="section-kicker">Authorized access</span>
+            <h2>Sign in to operations</h2>
+            <p>Use your administrator account to manage pickup requests.</p>
+            <form id="adminLoginForm" novalidate>
+              <div class="field">
+                <label for="adminEmail">Email</label>
+                <input id="adminEmail" type="email" autocomplete="username" required />
+              </div>
+
+              <div class="field admin-password-field">
+                <label for="adminPassword">Password</label>
+                <input id="adminPassword" type="password" autocomplete="current-password" required />
+              </div>
+
+              <div class="form-actions admin-login-actions">
+                <button type="submit" class="primary-btn">Sign in</button>
+              </div>
+
+              <div id="adminLoginStatus" class="submit-state" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <div id="adminDashboard" class="admin-panel" aria-live="polite">
+            <div class="admin-layout">
+              <aside class="admin-sidebar" id="adminSidebar" aria-label="Operations sections">
+                <a class="admin-sidebar-brand" href="http://localhost:3001/" aria-label="EcoPickup home"><span class="brand-mark">🌿</span><span><strong>EcoPickup</strong><small>Smart Waste Collection</small></span></a>
+                <div class="admin-sidebar-label">Workspace</div>
+                <nav class="admin-side-nav">
+                  <a class="active" href="#dashboardOverview"><span aria-hidden="true">▦</span>Dashboard</a>
+                  <a href="#requestsSection"><span aria-hidden="true">↗</span>Pickup Requests</a>
+                  <a href="http://localhost:3003/"><span aria-hidden="true">⌖</span>Track Pickup</a>
+                  <a href="#analyticsSection"><span aria-hidden="true">◷</span>Analytics</a>
+                  <a href="#distributionChartPanel"><span aria-hidden="true">◉</span>Waste Categories</a>
+                  <span class="admin-nav-unavailable" aria-disabled="true" title="User management is not available in the current API"><span aria-hidden="true">♙</span>Users<small>Not available</small></span>
+                  <span class="admin-nav-unavailable" aria-disabled="true" title="Settings are not available in the current API"><span aria-hidden="true">⚙</span>Settings<small>Not available</small></span>
+                </nav>
+                <div class="admin-sidebar-footer">
+                  <div class="admin-sidebar-note"><span class="connection-dot" id="sidebarConnectionDot"></span><span>Request service<br /><strong id="sidebarConnectionText">Checking…</strong></span></div>
+                  <div class="admin-sidebar-account"><span class="admin-avatar">EP</span><span><strong>Administrator</strong><small>Operations</small></span></div>
+                  <button id="logoutBtn" class="sidebar-logout" type="button"><span aria-hidden="true">↪</span> Log out</button>
+                </div>
+              </aside>
+              <button class="admin-sidebar-backdrop" id="adminSidebarBackdrop" type="button" aria-label="Close navigation" hidden></button>
+
+              <div class="admin-content">
+                <header class="admin-topbar" id="dashboardOverview">
+                  <div class="admin-heading-row">
+                    <button class="admin-menu-toggle" id="adminMenuToggle" type="button" aria-expanded="false" aria-controls="adminSidebar" aria-label="Open admin navigation"><span></span><span></span><span></span></button>
+                    <div>
+                      <span class="section-kicker">Operations overview</span>
+                      <h2 id="adminGreeting">Good afternoon, Admin</h2>
+                      <p>Monitor your waste collection activity in real time.</p>
+                    </div>
+                  </div>
+                  <div class="admin-top-actions">
+                    <label class="sr-only" for="adminSearch">Search pickup requests</label>
+                    <input id="adminSearch" type="search" placeholder="Search ID, name, city…" />
+                    <button class="top-icon-btn notification-btn" id="adminNotificationBtn" type="button" aria-label="Show pending requests" title="Show pending requests"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span id="pendingCountBadge">0</span></button>
+                    <button class="top-icon-btn" id="dashboardHelpBtn" type="button" aria-label="Dashboard help" title="Dashboard help"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.4 1.6c-1 1.1-2 1.4-2 3M12 17h.01"/></svg></button>
+                    <span class="theme-indicator"><span></span> NIGHT MODE</span>
+                    <div class="admin-profile"><span class="admin-avatar">EP</span><span>Admin</span></div>
+                  </div>
+                </header>
+
+                <div class="system-status" id="systemStatus" role="status"><span class="connection-dot"></span><span id="systemStatusText">Checking system status…</span></div>
+                <div id="adminLoading" class="admin-loading" role="status" hidden>Loading live request data…</div>
+                <div class="kpi-grid" id="kpiGrid" aria-label="Request summary"></div>
+
+                <section class="admin-section analytics-section" id="analyticsSection" aria-labelledby="analyticsTitle">
+                  <div class="section-head admin-section-head analytics-heading">
+                    <div>
+                      <span class="section-kicker">Live request data</span>
+                      <h2 id="analyticsTitle">Collection analytics</h2>
+                    </div>
+                    <div class="range-controls" role="group" aria-label="Filter pickup activity chart by date range">
+                      <button type="button" data-range-days="7">7D</button>
+                      <button type="button" data-range-days="30" class="active" aria-pressed="true">30D</button>
+                      <button type="button" data-range-days="90">90D</button>
+                    </div>
+                  </div>
+                  <p class="chart-subtitle">Requests created in range, grouped by current status</p>
+                  <div class="admin-analytics-grid">
+                    <article class="chart-card activity-chart-card">
+                      <div class="chart-card-heading"><div><span class="chart-eyebrow">ACTIVITY</span><h3>Pickup Activity</h3></div><span id="activityRangeLabel">Last 30 days</span></div>
+                      <div class="chart-canvas-wrap"><canvas id="activityChart" aria-label="Pickup requests by created date and current status"></canvas></div>
+                      <div class="chart-legend"><span><i class="legend-completed"></i>Completed</span><span><i class="legend-active"></i>Active pickups</span><span><i class="legend-pending"></i>Pending</span></div>
+                    </article>
+                    <article class="chart-card distribution-chart-card" id="distributionChartPanel">
+                      <div class="chart-card-heading"><div><span class="chart-eyebrow">MATERIALS</span><h3>Waste Distribution</h3></div></div>
+                      <div class="chart-canvas-wrap"><canvas id="categoryChart" aria-label="Requests by waste category"></canvas></div>
+                      <p class="distribution-note">Based on requests currently in the service.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="admin-section requests-section" id="requestsSection" aria-labelledby="requestsTitle">
+                  <div class="section-head admin-section-head">
+                    <div>
+                      <span class="section-kicker">Service queue</span>
+                      <h2 id="requestsTitle">Recent requests</h2>
+                      <p id="requestCount">All requests from the shared API</p>
+                    </div>
+                    <div class="admin-filters" aria-label="Filter pickup requests">
+                      <label class="sr-only" for="adminCategoryFilter">Filter by waste category</label>
+                      <select id="adminCategoryFilter"><option value="">All waste types</option></select>
+                      <label class="sr-only" for="adminStatusFilter">Filter by status</label>
+                      <select id="adminStatusFilter">
+                        <option value="">All statuses</option>
+                        <option>Pending</option><option>Accepted</option><option>Scheduled</option>
+                        <option>Picked Up</option><option>Completed</option><option>Cancelled</option>
+                      </select>
+                      <label class="sr-only" for="adminDateFilter">Filter by pickup date</label>
+                      <input id="adminDateFilter" type="date" aria-label="Filter by pickup date" />
+                      <button class="clear-filters-btn" id="clearAdminFilters" type="button">Clear</button>
+                    </div>
+                  </div>
+                  <div id="adminError" class="admin-error" role="alert" hidden></div>
+                  <div class="table-wrap">
+                    <table class="admin-table">
+                      <thead><tr>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="requestId">Request ID <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="fullName">Customer <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="wasteCategory">Waste type <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="city">Location <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="pickupDate">Date <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="timeSlot">Time <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col" aria-sort="none"><button class="table-sort" type="button" data-sort-key="status">Status <span aria-hidden="true">↕</span></button></th>
+                        <th scope="col">Action</th>
+                      </tr></thead>
+                      <tbody id="adminTableBody"></tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="request-dialog" id="requestDetailsDialog" aria-labelledby="detailsTitle">
+        <div class="dialog-header"><div><span class="section-kicker">Request details</span><h2 id="detailsTitle">Pickup request</h2></div><button class="dialog-close" id="closeDetails" type="button" aria-label="Close request details">×</button></div>
+        <div id="requestDetailsBody" class="details-grid"></div>
+        <h3 class="dialog-timeline-heading">Status timeline</h3>
+        <div id="detailsTimeline" class="details-timeline"></div>
+        <div id="detailActions" class="detail-actions" aria-label="Update request status"></div>
+      </dialog>
+    </main>
+
+    <dialog class="request-dialog help-dialog" id="dashboardHelpDialog" aria-labelledby="helpTitle">
+      <div class="dialog-header"><div><span class="section-kicker">Dashboard guide</span><h2 id="helpTitle">About this activity view</h2></div><button class="dialog-close" id="closeDashboardHelp" type="button" aria-label="Close help">×</button></div>
+      <p>Activity is grouped by request creation date and the request's current status. This demo API does not store status-change history, so past status transitions are not reconstructed.</p>
+      <p>Waste distribution and totals use the requests currently available to the shared service.</p>
+    </dialog>
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="/config.js"></script>
+    <script src="/shared/api.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

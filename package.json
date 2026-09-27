@@ -1,0 +1,21 @@
+{
+  "name": "ecopickup",
+  "version": "1.0.0",
+  "description": "EcoPickup smart waste collection request platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "api": "node server.js",
+    "home": "node sites/home/server.js",
+    "request": "node sites/request/server.js",
+    "track": "node sites/track/server.js",
+    "admin": "node sites/admin/server.js",
+    "dev": "node --watch server.js",
+    "test": "node --check server.js && node --check public/app.js && node --check shared/site-server.js && node --check shared/api.js && node --check sites/home/server.js && node --check sites/request/server.js && node --check sites/track/server.js && node --check sites/admin/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.3.0"
+  }
+}

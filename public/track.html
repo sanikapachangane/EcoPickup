@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Request | EcoPickup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container navbar">
+        <a href="http://localhost:3001/" class="brand" aria-label="EcoPickup home">
+          <span class="brand-mark">♻</span>
+          <span>EcoPickup</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+        <nav class="nav-links" id="siteNav" aria-label="Main navigation">
+          <a href="http://localhost:3001/">Home</a>
+          <a href="http://localhost:3002/">Request Pickup</a>
+          <a href="http://localhost:3003/">Track Request</a>
+          <a href="http://localhost:3004/">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <span class="section-kicker">Collection tracking</span>
+          <h1>Know where your request stands</h1>
+          <p>Enter the ID from your confirmation to see the latest status and collection details.</p>
+        </div>
+      </section>
+
+      <section class="form-shell">
+        <div class="container tracking-page-layout">
+          <div class="track-layout">
+            <div class="info-panel tracker-panel">
+              <span class="section-kicker">Request lookup</span>
+              <h2>Track a pickup</h2>
+              <p>Your tracking timeline reflects the status last saved by the operations team.</p>
+            <form id="trackForm" class="track-form" novalidate>
+                <label class="sr-only" for="requestIdInput">Request ID</label>
+                <input id="requestIdInput" type="text" placeholder="e.g. EP-7K42P9" aria-label="Request ID" autocomplete="off" />
+                <button type="submit" class="primary-btn">Track Request <span aria-hidden="true">→</span></button>
+            </form>
+
+              <div id="trackStatus" class="submit-state" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="status-card tracking-result" id="trackingResult" aria-live="polite">
+              <div class="tracking-placeholder">
+                <div class="tracking-placeholder-mark" aria-hidden="true">EP</div>
+                <h2>Request details will appear here</h2>
+                <p>Enter your request ID to see its current status, pickup window, and location.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="history-section" id="my-requests" aria-labelledby="historyTitle">
+            <div class="history-heading">
+              <div>
+                <span class="section-kicker">This browser</span>
+                <h2 id="historyTitle">Your recent requests</h2>
+                <p>Request IDs created on this device are saved here for quick access.</p>
+              </div>
+              <div class="history-filters">
+                <label class="sr-only" for="historySearch">Search saved requests</label>
+                <input id="historySearch" type="search" placeholder="Search by ID or category" />
+                <label class="sr-only" for="historyStatus">Filter saved requests by status</label>
+                <select id="historyStatus">
+                  <option value="">All statuses</option>
+                  <option>Pending</option>
+                  <option>Accepted</option>
+                  <option>Scheduled</option>
+                  <option>Picked Up</option>
+                  <option>Completed</option>
+                  <option>Cancelled</option>
+                </select>
+              </div>
+            </div>
+            <div id="historyLoading" class="history-message is-loading" role="status" hidden>Loading saved requests…</div>
+            <div id="historyError" class="history-message error-state" role="alert" hidden></div>
+            <div id="historyEmpty" class="empty-state history-empty" hidden>No requests are saved in this browser yet.</div>
+            <div id="historyList" class="request-history-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+    <script src="/config.js"></script>
+    <script src="/shared/api.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

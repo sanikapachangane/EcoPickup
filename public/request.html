@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Pickup | EcoPickup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container navbar">
+        <a href="http://localhost:3001/" class="brand" aria-label="EcoPickup home">
+          <span class="brand-mark">♻</span>
+          <span>EcoPickup</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+        <nav class="nav-links" id="siteNav" aria-label="Main navigation">
+          <a href="http://localhost:3001/">Home</a>
+          <a href="http://localhost:3003/">Track Request</a>
+          <a href="http://localhost:3004/">Login</a>
+          <a href="http://localhost:3002/" class="button-link primary-btn">Request Pickup</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <span class="section-kicker">Pickup request</span>
+          <h1>Plan a responsible collection</h1>
+          <p>Tell us what needs collecting and when. Your request ID appears after the service confirms it.</p>
+        </div>
+      </section>
+
+      <section class="form-shell">
+        <div class="container request-layout">
+          <aside class="request-aside" aria-label="Pickup process">
+            <span class="request-aside-label">Your collection, step by step</span>
+            <ol class="process-list">
+              <li><span>01</span><div><strong>Share the details</strong><p>Choose a waste stream and pickup window.</p></div></li>
+              <li><span>02</span><div><strong>Receive a request ID</strong><p>Use it to look up your request at any time.</p></div></li>
+              <li><span>03</span><div><strong>Follow each update</strong><p>See status changes from the operations team.</p></div></li>
+            </ol>
+            <div class="request-aside-note"><strong>Good to know</strong><p>Separate recyclable materials where possible. Add handling notes for bulky or unusual items.</p></div>
+          </aside>
+
+          <div class="form-card pickup-form-card">
+            <div class="form-intro">
+              <span class="eyebrow">New collection</span>
+              <h2>Pickup details</h2>
+              <p>Fields marked <span class="required-mark">*</span> are required.</p>
+            </div>
+            <form id="pickupForm" novalidate>
+              <div class="form-section">
+                <div class="form-section-title">
+                  <div><span class="form-step">01</span><h3>Contact details</h3></div>
+                  <span>Who should we contact?</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="fullName">Full Name<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="fullName" name="fullName" type="text" autocomplete="name" required aria-invalid="false" aria-describedby="error-fullName" />
+                    <div class="form-error" id="error-fullName" data-error-for="fullName"></div>
+                  </div>
+
+                  <div class="field">
+                    <label for="phone">Phone<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required aria-invalid="false" aria-describedby="error-phone" />
+                    <div class="form-error" id="error-phone" data-error-for="phone"></div>
+                  </div>
+
+                  <div class="field full">
+                    <label for="email">Email<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="email" name="email" type="email" autocomplete="email" required aria-invalid="false" aria-describedby="error-email" />
+                    <div class="form-error" id="error-email" data-error-for="email"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <div class="form-section-title">
+                  <div><span class="form-step">02</span><h3>Waste details</h3></div>
+                  <span>Help us prepare the right collection</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field full">
+                    <span class="field-label" id="wasteCategoryLabel">Waste Category<span class="required-mark" aria-hidden="true">*</span></span>
+                    <div class="category-selector" role="radiogroup" aria-labelledby="wasteCategoryLabel" aria-describedby="error-wasteCategory">
+                      <label class="category-choice"><input id="wasteCategory" name="wasteCategory" type="radio" value="Dry Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">♻</span><span>Dry Waste</span><span class="category-check" aria-hidden="true">✓</span></label>
+                      <label class="category-choice"><input name="wasteCategory" type="radio" value="Wet Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">💧</span><span>Wet Waste</span><span class="category-check" aria-hidden="true">✓</span></label>
+                      <label class="category-choice"><input name="wasteCategory" type="radio" value="Plastic Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">🥤</span><span>Plastic</span><span class="category-check" aria-hidden="true">✓</span></label>
+                      <label class="category-choice"><input name="wasteCategory" type="radio" value="E-Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">⌘</span><span>E-Waste</span><span class="category-check" aria-hidden="true">✓</span></label>
+                      <label class="category-choice"><input name="wasteCategory" type="radio" value="Hazardous Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">⚠</span><span>Hazardous</span><span class="category-check" aria-hidden="true">✓</span></label>
+                      <label class="category-choice"><input name="wasteCategory" type="radio" value="Other Waste" required aria-invalid="false" /><span class="category-choice-icon" aria-hidden="true">📦</span><span>Other</span><span class="category-check" aria-hidden="true">✓</span></label>
+                    </div>
+                    <div class="form-error" id="error-wasteCategory" data-error-for="wasteCategory"></div>
+                  </div>
+
+                  <div class="field">
+                    <label for="quantity">Approximate Quantity<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="quantity" name="quantity" type="text" required aria-invalid="false" placeholder="e.g. 3 boxes" aria-describedby="error-quantity" />
+                    <div class="form-error" id="error-quantity" data-error-for="quantity"></div>
+                  </div>
+
+                  <div class="field full">
+                    <label for="wasteDescription">Description<span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="wasteDescription" name="wasteDescription" required aria-invalid="false" aria-describedby="error-wasteDescription"></textarea>
+                    <div class="form-error" id="error-wasteDescription" data-error-for="wasteDescription"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <div class="form-section-title">
+                  <div><span class="form-step">03</span><h3>Pickup location</h3></div>
+                  <span>Where should the team arrive?</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field full">
+                    <label for="address">Street address<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="address" name="address" type="text" autocomplete="street-address" required aria-invalid="false" aria-describedby="error-address" />
+                    <div class="form-error" id="error-address" data-error-for="address"></div>
+                  </div>
+
+                  <div class="field">
+                    <label for="city">City<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="city" name="city" type="text" autocomplete="address-level2" required aria-invalid="false" aria-describedby="error-city" />
+                    <div class="form-error" id="error-city" data-error-for="city"></div>
+                  </div>
+
+                  <div class="field">
+                    <label for="pincode">Pincode<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="pincode" name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" required aria-invalid="false" aria-describedby="error-pincode" />
+                    <div class="form-error" id="error-pincode" data-error-for="pincode"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <div class="form-section-title">
+                  <div><span class="form-step">04</span><h3>Schedule</h3></div>
+                  <span>Choose a preferred window</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="pickupDate">Pickup Date<span class="required-mark" aria-hidden="true">*</span></label>
+                    <input id="pickupDate" name="pickupDate" type="date" required aria-invalid="false" aria-describedby="error-pickupDate" />
+                    <div class="form-error" id="error-pickupDate" data-error-for="pickupDate"></div>
+                  </div>
+
+                  <div class="field">
+                    <label for="timeSlot">Time Slot<span class="required-mark" aria-hidden="true">*</span></label>
+                    <select id="timeSlot" name="timeSlot" required aria-invalid="false" aria-describedby="error-timeSlot">
+                      <option value="">Select slot</option>
+                      <option>Morning — 8 AM to 11 AM</option>
+                      <option>Afternoon — 11 AM to 2 PM</option>
+                      <option>Evening — 2 PM to 6 PM</option>
+                    </select>
+                    <div class="form-error" id="error-timeSlot" data-error-for="timeSlot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <div class="form-section-title">
+                  <div><span class="form-step">05</span><h3>Review &amp; submit</h3></div>
+                  <span>Final details</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field full">
+                    <label for="instructions">Instructions</label>
+                    <textarea id="instructions" name="instructions" aria-invalid="false" placeholder="Gate access, item handling, or other helpful notes"></textarea>
+                    <div class="form-error" data-error-for="instructions"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="reset" class="ghost-btn">Reset</button>
+                <button type="submit" class="primary-btn" id="submitPickupBtn">Submit Request</button>
+              </div>
+
+              <div id="submitState" class="submit-state" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="/config.js"></script>
+    <script src="/shared/api.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoPickup | Smart Waste Collection</title>
+    <meta
+      name="description"
+      content="EcoPickup helps residents schedule waste pickup requests and lets administrators manage the collection lifecycle efficiently."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container navbar">
+        <a href="/" class="brand" aria-label="EcoPickup home">
+          <span class="brand-mark">♻</span>
+          <span>EcoPickup</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+        <nav class="nav-links" id="siteNav" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#waste-categories">Waste Categories</a>
+          <a href="http://localhost:3003/">Track Request</a>
+          <a href="http://localhost:3004/">Login</a>
+          <a href="http://localhost:3002/" class="button-link primary-btn">Request Pickup</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&amp;fit=crop&amp;w=2200&amp;q=88" alt="Recyclable materials sorted for collection" />
+        <div class="hero-category-floats" aria-hidden="true">
+          <div class="hero-float-tag float-dry"><span>♻</span><strong>DRY MATERIALS</strong></div>
+          <div class="hero-float-tag float-organic"><span>◌</span><strong>ORGANIC STREAM</strong></div>
+          <div class="hero-float-tag float-electronic"><span>⌘</span><strong>E-WASTE RECOVERY</strong></div>
+        </div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Community collection, made clear</span>
+            <h1>Smart Waste Collection Made Simple</h1>
+            <p class="hero-tagline">Dispose Responsibly. Schedule Easily.</p>
+            <p class="hero-description">Book a pickup, follow each update, and help your community handle waste with more care and less uncertainty.</p>
+
+            <div class="hero-actions">
+              <a class="primary-btn" href="http://localhost:3002/">Schedule a Pickup <span aria-hidden="true">→</span></a>
+              <a class="secondary-btn" href="http://localhost:3003/">Track Request</a>
+            </div>
+
+            <div class="hero-meta" aria-label="EcoPickup service highlights">
+              <span class="meta-pill"><span class="meta-dot"></span>6 waste streams</span>
+              <span class="meta-pill"><span class="meta-dot"></span>Request status updates</span>
+              <span class="meta-pill"><span class="meta-dot"></span>Local pickup scheduling</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">A simple three-step flow</span>
+              <h2>How EcoPickup works</h2>
+              <p>From request to pickup, the process stays simple and transparent.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="steps-card">
+              <div class="icon-box">1</div>
+              <div class="step-no">Choose</div>
+              <h3>Pick your waste type</h3>
+              <p>Choose a category such as plastic, e-waste, dry waste, or hazardous material to keep the request accurate.</p>
+            </article>
+
+            <article class="steps-card">
+              <div class="icon-box">2</div>
+              <div class="step-no">Schedule</div>
+              <h3>Submit your pickup request</h3>
+              <p>Fill in your details, address, date, and preferred time slot to generate a request instantly.</p>
+            </article>
+
+            <article class="steps-card">
+              <div class="icon-box">3</div>
+              <div class="step-no">Track</div>
+              <h3>Monitor in real time</h3>
+              <p>Track every progress stage from Pending to Accepted, Scheduled, and Completed through a unique ID.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="waste-categories">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">The right stream matters</span>
+              <h2>Waste categories</h2>
+              <p>Choose the right collection stream for a safer and more efficient pickup.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 7 9-4 9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg></div>
+              <h3>Dry Waste</h3>
+              <p>Paper, cardboard, packaging, and other recyclable dry materials.</p>
+              <ul>
+                <li>Newspapers</li>
+                <li>Boxes</li>
+                <li>Packaging sheets</li>
+              </ul>
+            </article>
+
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 10-6 8-16Z"/><path d="M4 21c3-5 6-8 12-11"/></svg></div>
+              <h3>Wet Waste</h3>
+              <p>Food scraps and organic waste that requires timely disposal.</p>
+              <ul>
+                <li>Fruit peels</li>
+                <li>Cooked leftovers</li>
+                <li>Garden clippings</li>
+              </ul>
+            </article>
+
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 2-3h6l2 4M17 8h3l2 4-3 3M17 16l-2 4H9l-2-4M7 16H4l-2-4 3-3"/><path d="m9 4 1 3-3 1m12 0-3 1 1 3m-9 4 1-3 3 1"/></svg></div>
+              <h3>Plastic Waste</h3>
+              <p>Plastic containers, wrappers, and recyclable material suitable for sorting.</p>
+              <ul>
+                <li>Plastic bottles</li>
+                <li>Packaging films</li>
+                <li>Containers</li>
+              </ul>
+            </article>
+
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M2 21h20M9 17l-1 4m7-4 1 4"/></svg></div>
+              <h3>E-Waste</h3>
+              <p>Electrical items that should be processed with care and compliance.</p>
+              <ul>
+                <li>Laptops</li>
+                <li>Chargers</li>
+                <li>Keyboards</li>
+              </ul>
+            </article>
+
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m10.3 4.1-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-2.9l-8-14a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 4h.01"/></svg></div>
+              <h3>Hazardous Waste</h3>
+              <p>Potentially risky material that requires specialized handling.</p>
+              <ul>
+                <li>Batteries</li>
+                <li>Paint cans</li>
+                <li>Medical waste</li>
+              </ul>
+            </article>
+
+            <article class="category-card">
+              <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM8 7V4h8v3M3 12h18m-11 0v2h4v-2"/></svg></div>
+              <h3>Other Waste</h3>
+              <p>Miscellaneous bulk waste that does not fit other categories.</p>
+              <ul>
+                <li>Broken fixtures</li>
+                <li>Large household waste</li>
+                <li>Mixed disposal items</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why-ecopickup">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Built for clearer collections</span>
+              <h2>Why EcoPickup</h2>
+              <p>Built to reduce confusion, improve visibility, and make collection operations efficient.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="benefit-card">
+              <h3>Clear waste guidance</h3>
+              <p>Help residents choose the correct category and avoid improper disposal decisions.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h3>Transparent status tracking</h3>
+              <p>Users can see when the request is accepted, scheduled, collected, and completed.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h3>Better collection coordination</h3>
+              <p>Admin teams can streamline workflow, review requests, and improve response times.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="impact">
+        <div class="container stats-wrap">
+          <div class="section-head" style="margin-bottom: 1.6rem; color: white;">
+            <div>
+              <span class="section-kicker section-kicker-light">Live operational indicators</span>
+              <h2 style="color: white;">Environmental impact, measured honestly</h2>
+              <p style="color: rgba(255,255,255,0.75);">Counts come from EcoPickup requests. Material weight and emissions are not estimated.</p>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <article class="stat-card">
+              <span>Requests submitted</span>
+              <div class="stat-value" data-impact-total>—</div>
+              <p>Recorded pickup requests</p>
+            </article>
+
+            <article class="stat-card">
+              <span>Completed pickups</span>
+              <div class="stat-value" data-impact-completed>—</div>
+              <p>Requests marked completed</p>
+            </article>
+
+            <article class="stat-card">
+              <span>Active requests</span>
+              <div class="stat-value" data-impact-active>—</div>
+              <p>Not completed or cancelled</p>
+            </article>
+
+            <article class="stat-card">
+              <span>Completion rate</span>
+              <div class="stat-value" data-impact-rate>—</div>
+              <p>Completed requests as a share of total</p>
+            </article>
+          </div>
+          <p class="impact-source" id="impactSource" role="status">Loading current request data…</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-banner">
+            <div>
+              <h2 style="margin-bottom: 0.5rem;">Ready to schedule your pickup?</h2>
+              <p style="margin: 0; color: rgba(255,255,255,0.75);">Simplify how your community manages and tracks waste collection.</p>
+            </div>
+            <div class="hero-actions" style="margin: 0;">
+              <a class="primary-btn" href="http://localhost:3002/" style="background: white; color: var(--green-900); box-shadow: none;">Request a Pickup</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand" aria-label="EcoPickup">
+            <span class="brand-mark">♻</span>
+            <span>EcoPickup</span>
+          </div>
+          <p style="margin-top: 0.8rem; max-width: 420px;">Smart waste collection designed for cleaner communities and accountable operations.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#waste-categories">Waste Categories</a>
+          <a href="http://localhost:3003/">Track Request</a>
+          <a href="http://localhost:3004/">Admin</a>
+        </div>
+      </div>
+    </footer>
+    <script src="/config.js"></script>
+    <script src="/shared/api.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
